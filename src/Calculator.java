@@ -57,7 +57,9 @@ public class Calculator {
 		if (this.numbers.empty()) {
 			return (0.0);
 		} else {
-			return this.numbers.pop();
+			Double resul = this.numbers.pop();
+			this.numbers.push(resul);
+			return resul;
 		}
 	}
 
@@ -101,9 +103,9 @@ public class Calculator {
 			break;
 		default:
 			int k = Character.getNumericValue(c);
-			if (0<=k&&k<10) {
+			if (0 <= k && k < 10) {
 				read(k);
-			}else {
+			} else {
 				throw new ParsingException(c);
 			}
 			break;
@@ -130,14 +132,14 @@ public class Calculator {
 	}
 
 	private void read() throws ParsingException {
+		if (hasDot) {
+			throw new ParsingException(this.numbers.pop());
+		}
 		hasDot = true;
 		mantisse = 1;
 		if (!isNumber) {
 			this.numbers.push(0.0);
 			isNumber = true;
-		}
-		else {
-			throw new ParsingException(this.numbers.pop());
 		}
 	}
 
@@ -208,10 +210,11 @@ public class Calculator {
 	}
 
 	void execute(Operator o) throws ParsingException {
-		if (o == Operator.UMINUS) { try {
-			Double a = this.numbers.pop();
-			this.numbers.push(-a);}
-			catch (EmptyStackException a) {
+		if (o == Operator.UMINUS) {
+			try {
+				Double a = this.numbers.pop();
+				this.numbers.push(-a);
+			} catch (EmptyStackException a) {
 				throw new ParsingException(o);
 			}
 		} else {
@@ -235,7 +238,6 @@ public class Calculator {
 					throw new ParsingException(false);
 				}
 			} catch (EmptyStackException a) {
-				// TODO Auto-generated catch block
 				throw new ParsingException(o);
 			}
 		}
@@ -252,5 +254,3 @@ public class Calculator {
 		assert this.operators.empty();
 	}
 }
-
-
