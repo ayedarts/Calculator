@@ -1,6 +1,6 @@
 # Calculator
 A JavaFX graphical calculator
-Please run GraphicalCalculator.jar in order to test the app.
+Please run GraphCalculator.jar in order to test the app.
 
 This project had the pedagogical aim of a first contact with JavaFX, as well as another efficient use of Object-Oriented programming.
 Every aspect of the caclculator was coded, both backend and frontend, giving a runnable java application which behaves as the default Windows calculator.
